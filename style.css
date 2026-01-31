@@ -1,0 +1,56 @@
+@import url(reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F2B185;
+    height: 100%;
+    width: 100%;
+    padding: 6vh 6vw;
+    gap: 10px;
+    font-family: "KiwiMaru";
+}
+
+#cursor{
+    height: 50px;
+    width: 85px;
+    position: absolute;
+    user-select: none;
+    -webkit-user-drag: none;
+    cursor: none;
+    pointer-events: none;
+}
+
+#Valera{
+    user-select: none;
+    -webkit-user-drag: none;    
+}
+
+.blockDiv{
+    background-color: blanchedalmond;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    font-size: 20px;
+    gap: 10px;
+    justify-content: center;
+}
+
+.divforbulka{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
+}
+
+.bulka{
+    position: absolute;
+}
