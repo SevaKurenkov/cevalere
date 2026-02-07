@@ -14,28 +14,44 @@ document.addEventListener('DOMContentLoaded', () => {
         playTriggerSound()
         setTimeout(()=>{}, 1500)
     }
-    let valera = document.querySelector('#Valera')
-    document.addEventListener('pointerdown', (e) => {
+    let valera = document.getElementById('Valera')
+    valera.addEventListener('click', (e) => {
         console.log(e)
-        if (e.target = valera){
-            toggleSound()
-        }
-        
+        toggleSound()
     })
 
-    let drag = true
-    let bulka = document.querySelector('.bulka')
-    bulka.addEventListener('pointerdown', (e) => {
-        drag = true
-        bulka.addEventListener('pointermove', (e) => {
-            console.log(e)
-            if ((drag == true) && ((0 <= (e.clientY + bulka.getBoundingClientRect().height / 2)) && (0 <= (e.clientY + bulka.getBoundingClientRect().height / 2)) && (e.clientY + bulka.getBoundingClientRect().height / 2) <= (window.innerHeight)) && (0 <= (e.clientX + bulka.getBoundingClientRect().width / 2) <= (window.innerWidth))){
-                bulka.style.left = `${e.clientX - bulka.getBoundingClientRect().width / 2}px`
-                bulka.style.top = `${e.clientY - bulka.getBoundingClientRect().height / 2}px`
-            }
-        })
-    })
-    document.addEventListener('pointerup', (e) => {
-        drag = false
-    })
+    let bulka = document.getElementById('bulka');
+    let bacpak = document.getElementById('bacpak');
+    let sound = new Audio("assets/sound1.mp3")
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    bulka.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - bulka.offsetLeft;
+        offsetY = e.clientY - bulka.offsetTop;
+        bulka.style.cursor = 'grabbing';
+    });
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            bulka.style.left = e.clientX - offsetX + 'px';
+            bulka.style.top = e.clientY - offsetY + 'px';
+        }
+        let r1 = bulka.getBoundingClientRect(); 
+        let r2 = bacpak.getBoundingClientRect(); 
+        if (!(r1.right < r2.left || r1.left > r2.right ||
+            r1.bottom < r2.top ||r1.top > r2.bottom)) {
+            bulka.remove();
+            isDragging = false;
+            sound.play()
+        }
+
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        bulka.style.cursor = 'grab';
+    }); 
 })
